@@ -1,0 +1,32 @@
+[
+  {
+    "title": "dashboard",
+    "url": "/dashboard#/",
+    "icon": "fa fa-desktop"
+  },
+  {
+    "title": "apps",
+    "url": "/dashboard#/apps",
+    "icon": "fa fa-tablet"
+  },
+  {
+    "title": "models",
+    "url": "/dashboard#/models",
+	"icon": "fa fa-cubes"
+  },
+  {
+    "title": "data",
+    "url": "/dashboard#/data",
+	"icon": "fa fa-database"
+  },
+  {
+    "title": "endpoints",
+    "url": "/dashboard#/endpoints",
+    "icon": "fa fa-share-alt"
+  },
+  {
+    "title": "users",
+    "url": "/dashboard#/users",
+    "icon": "fa fa-users"
+  }
+]

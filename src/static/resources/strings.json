@@ -1,0 +1,18 @@
+﻿{
+  "add":  "Add",
+  "class_detail_title": "Class Details",
+  "class_title": "Class",
+  "class_name_label": "Class Name",
+  "class_name_required": "Class name is required.",
+  "class_name_exist": "Class name is already exist.",
+  "class_property_title": "Class Property",
+  "close": "Close",
+  "create": "Create",
+  "dashboard": "dashboard",
+  "error_header": "Error",
+  "error_general": "Error occurred. Please try again.",
+  "log_out":  "log out",
+  "property_name_label":  "Property Name",
+  "reload": "Reload",
+  "save_changes": "Save Changes"
+}

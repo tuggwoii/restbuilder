@@ -1,0 +1,61 @@
+﻿'use strict';
+var BaseApi = require('./base');
+var Role = require('../database/models').Role;
+class RoleApi extends BaseApi {
+
+    validate (data) {
+        var promise = new Promise(function (resolve, reject) {
+            console.log(data);
+            if (!data) {
+                reject('INVALID DATA');
+            }
+            else if (!data.name) {
+                reject('INVALID DATA');
+            }
+            else {
+                resolve();
+            }
+        })
+        return promise;
+    }
+
+    getAll (context, req, res) {
+        Role.all().then(function (data) {
+            context.success(req, res, data);
+        }).catch(function (err) {
+            context.error(req, res, err, 500);
+        });
+    }
+
+    model (data) {
+        return {
+            name: data.name
+        }
+    }
+
+    add (context, req, res) {
+        var data = context.model(req.body);
+        console.log(data);
+        context.validate(data).then(function () {
+            Role.create(data, { isNewRecord: true }).then(function (model) {
+                context.success(req, res, model);
+            }).catch(function (err) {
+                context.error(req, res, err, 500);
+            });
+        }).catch(function (err) {
+            var error = {
+                message: err
+            };
+            context.error(req, res, error, 400);
+        });
+    }
+
+    endpoints() {
+        return [
+			{ url: '/roles', method: 'get', roles: [], response: this.getAll },
+            { url: '/roles', method: 'post', roles: [], response: this.add }
+        ];
+    }
+}
+
+module.exports = new RoleApi();

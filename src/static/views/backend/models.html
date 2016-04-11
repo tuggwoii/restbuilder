@@ -1,0 +1,30 @@
+﻿<h1>{{strings['class_title']?strings['class_title']:'[class_title]'}}</h1>
+<div ng-controller="ClassController">
+    <form class="form" name="classForm">
+        <div class="form-group">
+            <label>{{strings['class_name_label']?strings['class_name_label']:'[class_name_label]'}}</label>
+            <p class="alert alert-danger" ng-show="classForm.className.$error.required && classForm.className.$dirty">{{strings['class_name_required']?strings['class_name_required']:'[class_name_required]'}}</p>
+            <p class="alert alert-danger" ng-show="state.error ">{{strings['error_general']?strings['error_general']:'[error_general]'}}</p>
+            <p class="alert alert-danger" ng-show="state.exist">{{strings['class_name_exist']?strings['class_name_exist']:'[class_name_exist]'}}</p>
+            <div class="row">
+                <div class="col-md-9">
+                    <input type="text"
+                           class="form-control"
+                           name="className"
+                           required=""
+                           ng-model="model.name" />
+                </div>
+                <div class="col-md-3">
+                    <button type="button" class="full-widht btn btn-success" ng-click="createClass(classForm)">{{strings['create']?strings['create']:'[create]'}}</button>
+                </div>
+            </div>            
+        </div>
+    </form>
+    <div class="row">
+        <div class="col-lg-12">
+            <ul>
+                <li ng-repeat="class in classes">{{class.name}}</li>
+            </ul>
+        </div>
+    </div>
+</div>
