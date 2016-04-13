@@ -1,11 +1,11 @@
 ﻿'use strict';
 var BaseApi = require('./base');
 var Role = require('../database/models').Role;
+
 class RoleApi extends BaseApi {
 
     validate (data) {
         var promise = new Promise(function (resolve, reject) {
-            console.log(data);
             if (!data) {
                 reject('INVALID DATA');
             }
@@ -33,9 +33,18 @@ class RoleApi extends BaseApi {
         }
     }
 
+    delete (context, req, res) {
+        if (req.params.id) {
+            Role.destroy({ where: { id: req.params.id } }).then(function (model) {
+                context.success(req, res, { });
+            }).catch(function (err) {
+                context.error(req, res, err, 500);
+            });
+        }
+    }
+
     add (context, req, res) {
         var data = context.model(req.body);
-        console.log(data);
         context.validate(data).then(function () {
             Role.create(data, { isNewRecord: true }).then(function (model) {
                 context.success(req, res, model);
@@ -50,10 +59,11 @@ class RoleApi extends BaseApi {
         });
     }
 
-    endpoints() {
+    endpoints () {
         return [
-			{ url: '/roles', method: 'get', roles: [], response: this.getAll },
-            { url: '/roles', method: 'post', roles: [], response: this.add }
+			{ url: '/roles', method: 'get', roles: ['admin'], response: this.getAll },
+            { url: '/roles', method: 'post', roles: ['admin'], response: this.add },
+            { url: '/roles', method: 'delete', roles: ['admin'], response: this.delete, params: ['id'] }
         ];
     }
 }

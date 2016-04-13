@@ -2,7 +2,6 @@
 var crypto = require('crypto');
 var tokenSession = [];
 var userSession = [];
-var Account = require('../models/account');
 
 function generateToken () {
     var promise = new Promise(function (resolve, reject) {
@@ -30,9 +29,10 @@ exports.authorizeUser = function (user) {
             if (userSession[user.id]) {
                 delete tokenSession[userSession[user.id]];
             }
-            tokenSession[token] = Account.serializeAuthen(user);
+            tokenSession[token] = user;
             userSession[user.id] = token;
-            resolve(token);
+            user.token = token;
+            resolve(user);
         }).catch(function (err) {
             reject(err);
         });
@@ -49,7 +49,7 @@ exports.removeUser = function (user) {
             resolve();
         }
         else {
-            reject('session not found');
+            reject({ message: 'SESSION NOT FOUND' });
         }
     });
     return promise;

@@ -8,7 +8,7 @@ module.factory('URLS', function () {
         },
         accounts: {
             login: base + 'accounts/login',
-            register: base + 'accounts/register',
+            register: base + 'accounts',
             me: base + 'accounts/me',
             logout: base + 'accounts/logout'
         },

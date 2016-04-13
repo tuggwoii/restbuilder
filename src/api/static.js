@@ -4,13 +4,13 @@ var BaseApi = require('./base');
 
 class StaticApi extends BaseApi {
 
-    nav (context, request, response) {
-        fs.readFile('./src/db/routes/apis.json', 'utf-8', function (err, content) {
+    nav (context, req, res) {
+        fs.readFile('./src/database/routes/apis.json', 'utf-8', function (err, content) {
             if (err) {
-                context.error(response, 'Internal server error', 500);
+                context.error(req, res, err, 500);
             }
             else {
-                context.success(response, JSON.parse(content), function (data) {
+                context.success(req, res, JSON.parse(content), function (data) {
                     return data;
                 });
             }

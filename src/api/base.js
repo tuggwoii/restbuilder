@@ -12,15 +12,22 @@ class BaseApi {
         }
         var json = JSON.stringify(data);
         var model = JSON.parse(json);
+        if (model.password) {
+            delete model['password'];
+        }
         if (model.user) {
             delete model.user['password'];
             delete model.user['createdAt'];
             delete model.user['updatedAt'];
         }
+        if (model.role) {
+            delete model.role['createdAt'];
+            delete model.role['updatedAt'];
+        }
         return model;
     }
 
-    serializerList(collection) {
+    serializerList (collection) {
         var json = JSON.stringify(collection);
         return JSON.parse(json);
     }
@@ -40,27 +47,27 @@ class BaseApi {
                 meta: {}
             });
         }
-	}
+    }
 
-	error (req, res, err, status) {
-	    var code = status || 400;
-	    var error = {
-	        url: '/api/v1' + req.url,
-	        data: req.body ? JSON.stringify(req.body) : '',
-	        params: req.params ? JSON.stringify(req.params) : '',
-	        message: err.message ? err.message : '',
-	        stack: err.stack ? err.stack : '',
-	        status: code
-	    }
-		res.status(code).json({
+    error (req, res, err, status) {
+        var code = status || 400;
+        var error = {
+            url: '/api/v1' + req.url,
+            data: req.body ? JSON.stringify(req.body) : '',
+            params: req.params ? JSON.stringify(req.params) : '',
+            message: err.message ? err.message : '',
+            stack: err.stack ? err.stack : '',
+            status: code
+        };
+        res.status(code).json({
             data: [],
             error: error
-		});
-	}
+        });
+    }
 
-	endpoints () {
-        return { };
-	}
+    endpoints () {
+        return {};
+    }
 }
 
 module.exports = BaseApi;

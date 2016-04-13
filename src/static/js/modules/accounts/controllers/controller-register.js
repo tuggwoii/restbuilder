@@ -28,7 +28,7 @@ module.controller('RegisterController', ['$scope', '$cookies', 'AccountService',
                     NotificationService.stopLoading();
                 })
                 .error(function (ressponse, status) {
-                    if (status === 400 && ressponse.error.message === 'email exist') {
+                    if (status === 400 && ressponse.error.message.toLowerCase() === 'email exist') {
                         $scope.status.exist = true;
                     }
                     else {

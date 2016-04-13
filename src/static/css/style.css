@@ -58,7 +58,7 @@ small {
     left: 0;
     top: 0;
     height: 100%;
-    width: 350px;
+    width: 250px;
     padding-top: 50px;
 }
 
@@ -92,7 +92,7 @@ nav a:hover, nav a:active, nav a:focus {
 
 .container-fluid.has-sidebar {
     width: 100%;
-    padding-left: 350px;
+    padding-left: 250px;
 }
 
 .sidebar {

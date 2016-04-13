@@ -34,6 +34,9 @@ module.exports = function (request, response) {
                     paramsValid = false;
                 }
             }
+            else {
+                request.params = {};
+            }
             if (route.url === requestUrl && route.method === request.method.toLowerCase() && paramsValid) {
                 isFound = true;
                 if (route.roles.length) {
@@ -44,8 +47,9 @@ module.exports = function (request, response) {
                         response.status(401).json({
                             data: [],
                             error: {
-                                message: 'permission denied.'
-                            }
+                                message: 'PERMISSION DENIED'
+                            },
+                            meta: []
                         });
                     }
                 }
@@ -65,8 +69,9 @@ module.exports = function (request, response) {
         response.status(404).json({
             data: [],
             error: {
-                message: 'resource not found.'
-            }
+                message: 'NOT FOUND'
+            },
+            meta: []
         });
     }
 };

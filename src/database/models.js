@@ -1,4 +1,5 @@
-﻿var Sequelize = require('sequelize');
+﻿'use strict';
+var Sequelize = require('sequelize');
 var sequelize = require('./connection');
 
 var User = sequelize.define('users', {
@@ -7,21 +8,21 @@ var User = sequelize.define('users', {
         primaryKey: true,
         field: 'id'
     },
-    sid: {
+    email: {
         type: Sequelize.STRING,
-        field: 'sid'
-    },
-    username: {
-        type: Sequelize.STRING,
-        field: 'username'
+        field: 'email'
     },
     password: {
         type: Sequelize.STRING,
         field: 'password'
     },
-    telephone: {
+    first_name: {
         type: Sequelize.STRING,
-        field: 'telephone'
+        field: 'first_name'
+    },
+    last_name: {
+        type: Sequelize.STRING,
+        field: 'last_name'
     },
     user_role: {
         type: Sequelize.INTEGER,
@@ -59,31 +60,54 @@ var Role = sequelize.define('roles', {
     }
 });
 
-var Category = sequelize.define('category', {
+var UserApp = sequelize.define('users_apps', {
     id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         field: 'id'
     },
-    sid: {
-        type: Sequelize.STRING,
-        field: 'sid'
+    user_id: {
+        type: Sequelize.INTEGER,
+        field: 'userId'
+    },
+    app_id: {
+        type: Sequelize.INTEGER,
+        field: 'appId'
+    },
+    role_id: {
+        type: Sequelize.INTEGER,
+        field: 'roleId'
+    },
+    createdAt: {
+        type: Sequelize.DATE,
+        field: 'createdAt'
+    },
+    updatedAt: {
+        type: Sequelize.DATE,
+        field: 'updatedAt'
+    }
+}, {
+    freezeTableName: true
+});
+
+
+var App = sequelize.define('apps', {
+    id: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        field: 'id'
     },
     name: {
         type: Sequelize.STRING,
         field: 'name'
     },
-    description: {
+    public_key: {
         type: Sequelize.STRING,
-        field: 'description'
+        field: 'public_key'
     },
-    icon: {
+    private_key: {
         type: Sequelize.STRING,
-        field: 'icon'
-    },
-    color: {
-        type: Sequelize.STRING,
-        field: 'color'
+        field: 'private_key'
     },
     createdAt: {
         type: Sequelize.DATE,
@@ -92,58 +116,20 @@ var Category = sequelize.define('category', {
     updatedAt: {
         type: Sequelize.DATE,
         field: 'updatedAt'
-    }
-},{
-    freezeTableName: true
-});
-
-var Topic = sequelize.define('topics', {
-    id: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        field: 'id'
-    },
-    sid: {
-        type: Sequelize.STRING,
-        field: 'sid'
-    },
-    title: {
-        type: Sequelize.STRING,
-        field: 'title'
-    },
-    message: {
-        type: Sequelize.STRING,
-        field: 'message'
-    },
-    createdAt: {
-        type: Sequelize.DATE,
-        field: 'createdAt'
-    },
-    updatedAt: {
-        type: Sequelize.DATE,
-        field: 'updatedAt'
-    },
-    post_by: {
-        type: Sequelize.INTEGER,
-        field: 'userId'
-    },
-    topic_category: {
-        type: Sequelize.INTEGER,
-        field: 'categoryId'
     }
 }, {
     freezeTableName: true
 });
 
-var Comment = sequelize.define('comments', {
+var AppRoles = sequelize.define('app_roles', {
     id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         field: 'id'
     },
-    message: {
-        type: Sequelize.STRING,
-        field: 'message'
+    app_id: {
+        type: Sequelize.INTEGER,
+        field: 'appId'
     },
     createdAt: {
         type: Sequelize.DATE,
@@ -153,27 +139,21 @@ var Comment = sequelize.define('comments', {
         type: Sequelize.DATE,
         field: 'updatedAt'
     },
-    post_by: {
-        type: Sequelize.INTEGER,
-        field: 'userId'
-    },
-    topic_id: {
-        type: Sequelize.INTEGER,
-        field: 'topicId'
+    name: {
+        type: Sequelize.STRING,
+        field: 'name'
     }
 }, {
     freezeTableName: true
 });
-
 
 User.belongsTo(Role, { foreignKey: 'user_role' });
-Topic.belongsTo(User, { foreignKey: 'post_by' });
-Topic.belongsTo(Category, { foreignKey: 'topic_category' });
-Comment.belongsTo(User, { foreignKey: 'post_by' });
-Comment.belongsTo(Topic, { foreignKey: 'topic_id' });
+AppRoles.belongsTo(App, { foreignKey: 'app_id' });
+App.belongsToMany(User, { through: 'users_apps' });
+User.belongsToMany(App, { through: 'users_apps' });
 
 exports.User = User;
 exports.Role = Role;
-exports.Category = Category;
-exports.Topic = Topic;
-exports.Comment = Comment;
+exports.App = App;
+exports.AppRoles = AppRoles;
+exports.UserApp = UserApp;

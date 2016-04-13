@@ -23,7 +23,7 @@ class Pages extends Base {
     save () {
         var promise = new Promise(function (resolve, reject) {
             var dateTime = date.current();
-            var file = './src/db/routes/views.json';
+            var file = './src/database/routes/views.json';
             fs.writeFile(file, JSON.stringify(pages), function (err) {
                 if (err) reject(err);
                 log.write('pages saved: ' + dateTime);
@@ -34,7 +34,7 @@ class Pages extends Base {
     }
 
     sync () {
-        pages = JSON.parse(fs.readFileSync('src/db/routes/views.json', 'utf8'));
+        pages = JSON.parse(fs.readFileSync('src/database/routes/views.json', 'utf8'));
     }
 
     serialize (data) {
