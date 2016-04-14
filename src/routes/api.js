@@ -4,7 +4,7 @@ var staticApi = require('../api/static');
 var roleApi = require('../api/role');
 var accountApi = require('../api/account');
 var pageApi = require('../api/page');
-var classApi = require('../api/class');
+var classApi = require('../api/model');
 var appApi = require('../api/app');
 var routes = [staticApi, roleApi, accountApi, appApi, pageApi, classApi];
 

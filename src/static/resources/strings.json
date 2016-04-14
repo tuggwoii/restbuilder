@@ -1,5 +1,8 @@
 ﻿{
-  "add":  "Add",
+  "add": "Add",
+  "cancel": "Cancel",
+  "cant_create_app": "Can't create the app",
+  "cant_load_apps": "Can't load the apps",
   "class_detail_title": "Class Details",
   "class_title": "Class",
   "class_name_label": "Class Name",
@@ -8,11 +11,15 @@
   "class_property_title": "Class Property",
   "close": "Close",
   "create": "Create",
+  "create_app": "Create App",
+  "create_app_success": "App was created.",
   "dashboard": "dashboard",
   "error_header": "Error",
   "error_general": "Error occurred. Please try again.",
-  "log_out":  "log out",
+  "log_out": "log out",
+  "no_data": "- NO DATA -",
   "property_name_label":  "Property Name",
   "reload": "Reload",
-  "save_changes": "Save Changes"
+  "save_changes": "Save Changes",
+  "success": "success"
 }

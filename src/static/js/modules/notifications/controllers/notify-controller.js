@@ -1,9 +1,9 @@
 ﻿'use strict';
-module.controller('DialogController', ['$scope', '$timeout', function ($scope, $timeout) {
+module.controller('NotifyController', ['$scope', '$timeout', function ($scope, $timeout) {
 
     $scope.model = {};
 
-    $scope.$on('OpenDialog', function (event, model) {
+    $scope.$on('OpenNotify', function (event, model) {
         $scope.model = model;
         if (!model) {
             $scope.model = {};
@@ -14,7 +14,12 @@ module.controller('DialogController', ['$scope', '$timeout', function ($scope, $
         if (!$scope.model.message) {
             $scope.model.message = $scope.strings['error_general'];
         }
+        if (!$scope.model.type) {
+            $scope.model.type = 'success';
+        }
         $scope.model.isShow = true;
+
+        $timeout($scope.close, 8000);
     });
 
     $scope.close = function () {

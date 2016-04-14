@@ -22,7 +22,6 @@ module.controller('LoginController', ['$scope', '$cookies', 'AccountService', 'N
                 .success(function (res) {
                     $cookies.put('Authorization', res.data.token);
                     window.location.href = '/dashboard';
-                    NotificationService.stopLoading();
                 })
                 .error(function (ressponse, status) {
                     if (status === 400) {
@@ -31,6 +30,7 @@ module.controller('LoginController', ['$scope', '$cookies', 'AccountService', 'N
                     else {
                         $scope.status.error = true;
                     }
+                }).finally(function () {
                     NotificationService.stopLoading();
                 });
         }
