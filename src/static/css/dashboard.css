@@ -102,6 +102,15 @@ nav .fa.fa-tablet {
 .dashboard .no-data {
     margin-top:30px;
 }
+.apps ul {
+    margin-top: 50px;
+}
+.apps li {
+    padding:20px;
+    border:1px solid #ccc;
+    margin-top: 10px;
+    cursor:pointer;
+}
 @media screen and (max-width: 992px) {
     .logo-circle img {
         width: 35px;
